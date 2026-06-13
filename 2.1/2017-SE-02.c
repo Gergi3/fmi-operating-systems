@@ -7,11 +7,11 @@
 #include <stdio.h>
 
 // CONSTANTS FOR ERRORS
-#define FILE_OPEN_ERR 400
+#define FILE_OPEN_ERR 100
 #define FILE_OPEN_MSG "Couldn't open file"
-#define FILE_READ_ERR 400
+#define FILE_READ_ERR 101
 #define FILE_READ_MSG "Coudln't read from file"
-#define FILE_WRITE_ERR 400
+#define FILE_WRITE_ERR 102
 #define FILE_WRITE_MSG "Couldn't write to file"
 
 // LOGIC CONSTANTS
