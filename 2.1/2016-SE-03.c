@@ -80,9 +80,9 @@ static void write_el(int fd, uint32_t el, size_t pos) {
 
 // ALGORITHM
 static void bubble_sort_file(int fd) {
-    size_t file_size = get_file_size(fd);
-    for (size_t i = 0; i < file_size; i++) {
-        for (size_t j = i; j < file_size - 1; j++) {
+    size_t file_size = get_file_size(fd) / sizeof(uint32_t);
+    for (size_t i = 0; i < file_size - 1; i++) {
+        for (size_t j = 0; j < file_size - i - 1; j++) {
             uint32_t curr_el = read_el(fd, j);
             uint32_t next_el = read_el(fd, j + 1);
             if (curr_el > next_el) {
