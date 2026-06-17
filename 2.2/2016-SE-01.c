@@ -19,6 +19,9 @@
 
 #define REQUIRED_ARGS 2
 
+void sys_err(int status, int code, const char* message);
+void assert_true(bool success, int code, const char* message);
+
 void sys_err(int status, int code, const char* message) {
     if (status == -1) {
         err(code, message);
