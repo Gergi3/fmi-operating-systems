@@ -13,6 +13,11 @@
 
 #define PROMPT_MSG "Prompt: "
 #define BUF_SIZE 4096
+
+void sys_err(int status, int code, const char* message);
+void write_s(int fd, const void* buf, size_t len);
+size_t read_s(int fd, void* buf, size_t len);
+
 void sys_err(int status, int code, const char* message) {
     if (status == -1) {
         err(code, message);
