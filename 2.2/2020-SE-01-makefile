@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+
+CC=				gcc
+CFLAGS_OPT?=	-O2 -g -pipe
+CFLAGS_STD?=	-std=c11
+CFLAGS_WARN?=	-Wall -W -Wextra -Wpedantic
+
+CFLAGS?=		${CFLAGS_OPT}
+CFLAGS+=		${CFLAGS_STD} ${CFLAGS_WARN}
+
+#CFLAGS+=		-Werror
+CFLAGS+=		-Wbad-function-cast -Wcast-align -Wcast-qual -Wchar-subscripts \
+				-Winline -Wmissing-prototypes -Wnested-externs -Wpointer-arith \
+				-Wredundant-decls -Wshadow -Wstrict-prototypes -Wwrite-strings
+
+CPPFLAGS_STD?=	-D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700
+CPPFLAGS+=		${CPPFLAGS_STD}
+
+RM?=			rm -f
+
+PROGS=			foo bar
+FOO_OBJS=		foo.o
+BAR_OBJS=		bar.o
+SRCS=			foo.c bar.c
+
+all:			${PROGS}
+
+foo:			${FOO_OBJS}
+	${CC} ${LDFLAGS} -o foo ${FOO_OBJS}
+
+bar:			${BAR_OBJS}
+	${CC} ${LDFLAGS} -o bar ${BAR_OBJS}
+
+%.o:			%.c
+	${CC} ${CPPFLAGS} ${CFLAGS} -c -o $@ $<
+
+clean:
+	${RM} -- ${FOO_OBJS} ${BAR_OBJS} ${PROGS}
+
+.PHONY: all clean
