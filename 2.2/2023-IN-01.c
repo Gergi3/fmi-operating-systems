@@ -32,6 +32,21 @@
 
 static char words[WORD_COUNT][WORD_SIZE] = { "tic ", "tac ", "toe\n" };
 
+int sys_err(int status, int code, const char* message);
+void write_s(int fd, const void* buf, size_t len);
+size_t read_s(int fd, void* buf, size_t len);
+void assert_true(bool success, int code, const char* message);
+void pipe_s(int pfd[2]);
+void sem_signal(int pfd[2]);
+void sem_wait(int pfd[2]);
+void wait_children(size_t n);
+pid_t fork_s(void);
+void dup2_s(int oldfd, int newfd);
+size_t get_offset(size_t process_count);
+void close_except(size_t process_count, size_t wait_indx, size_t signal_indx);
+void do_job(bool is_parent_first, size_t process_count, size_t word_count, size_t indx);
+void solve(size_t process_count, size_t word_count);
+
 int sys_err(int status, int code, const char* message) {
     if (status == -1) {
         err(code, message);
@@ -77,7 +92,7 @@ void wait_children(size_t n) {
     }
 }
 
-pid_t fork_s() {
+pid_t fork_s(void) {
     pid_t child_pid = fork();
     sys_err(child_pid, FORK_ERR);
     return child_pid;
