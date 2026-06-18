@@ -23,6 +23,12 @@
 #define ARGS_COUNT 3
 #define BUF_SIZE 4096
 
+int sys_err(int status, int code, const char* message);
+void assert_true(bool success, int code, const char* message);
+void start_read(const char* filename);
+void wait_children(size_t n);
+bool is_special(char symb);
+
 int sys_err(int status, int code, const char* message) {
     if (status == -1) {
         err(code, message);
